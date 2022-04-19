@@ -1,0 +1,97 @@
+.card-header {
+    border-bottom: 0px;
+}
+.user-panel img {
+    width: 4rem;
+    height: 4.5rem;
+}
+
+.info p {
+    color: whitesmoke;
+
+    margin: 0px;
+}
+
+.card_info_student label {
+    margin-bottom: 0px !important;
+}
+.solution .alert-success {
+    color: #000;
+    background: #e2e3e5;
+    border-color: #d6d8db;
+}
+
+.solution .alert-success hr {
+    border-top-color: #6f42c1;
+}
+.main-footer {
+    font-size: small !important;
+}
+
+.menu_dashed {
+    display: none !important;
+}
+
+#simpleList tr:hover {
+    background-color: darkgray;
+}
+
+/* tooltip pertinalized */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+span.select2-selection.select2-selection--single {
+    height: 40px;
+}
+.myActivity {
+    background-color: #bdded5 !important;
+}
+
+a.deleteRed{
+    color: #b1000091 !important;
+}
+
+/* start css for swithc  */
+
+/* end css for swittc */
+
+.fillPosition{
+    background-color: #84c2a3 !important;
+}
