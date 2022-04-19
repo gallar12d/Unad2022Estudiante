@@ -26,6 +26,8 @@
                                     <th scope="col">Fecha Inicio</th>
                                     <th scope="col">Programa</th>
                                     <th scope="col">Tipo</th>
+                                    <th scope="col">Estudiante</th>
+
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
@@ -37,6 +39,8 @@
                                     <td>{{$p->fecha_inicio}}</td>
                                     <td>{{$p->programa->programa}}</td>
                                     <td>{{$p->tipo}}</td>
+                                    <td>{{($p->estudiante)? $p->estudiante->primer_nombre.' '. $p->estudiante->primer_apellido  : 'N/A' }}</td>
+
                                     <td>
                                         <a class="btn  btn-outline-primary" href="{{route('procedimientos.show', $p->id_procedimiento)}}">Ver</a>
 

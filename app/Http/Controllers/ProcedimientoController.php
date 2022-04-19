@@ -51,8 +51,10 @@ class ProcedimientoController extends Controller
         $programas = \App\Programa::all();
         $escuelas = Escuela::all();
         $plantillas = \App\PlantillaProcedimiento::all();
+        $perfiles = Perfil::all();
 
-        return view('procedimiento.create', compact('programas', 'plantillas', 'escuelas'));
+
+        return view('procedimiento.create', compact('programas', 'plantillas', 'escuelas', 'perfiles'));
     }
 
 
@@ -66,6 +68,7 @@ class ProcedimientoController extends Controller
     public function store(Request $request)
     {
         $procedimiento = new Procedimiento();
+        
         $procedimiento->estado = 'Activo';
         $procedimiento->nombre = $request->procedimiento[0]['value'];
         $procedimiento->fecha_inicio = $request->procedimiento[1]['value'];
@@ -73,10 +76,11 @@ class ProcedimientoController extends Controller
         $procedimiento->tipo = $request->procedimiento[3]['value'];
         $procedimiento->id_programa = $request->procedimiento[4]['value'];
         $procedimiento->id_plantilla_procedimiento = $request->procedimiento[5]['value'];
-        $procedimiento->url_documento = $request->procedimiento[6]['value'];
-        $procedimiento->ruta_raiz = $request->procedimiento[7]['value'];
+        $procedimiento->id_estudiante = $request->procedimiento[6]['value'];
+        // $procedimiento->ruta_raiz = $request->procedimiento[7]['value'];
         $procedimiento->id_usuario_responsable = Auth::user()->id;
         $procedimiento->posicion = 0;
+
 
 
         if ($procedimiento->save()) {

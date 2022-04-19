@@ -59,7 +59,7 @@
 
                             <div class="form-group col-md-6 col-lg-6">
                                 <label for="tipo_identificacion">Perfil*</label>
-                                <select name="id_perfil" class="form-control" id="rol">
+                                <select name="id_perfil" class="form-control" id="perfil">
                                     @forelse($perfiles as $perfil)
                                     @if($perfil->perfil == $user->perfil->perfil)
                                     <option selected value="{{$perfil->id_perfil}}">{{$perfil->perfil}}</option>
@@ -198,6 +198,71 @@
 @endsection
 @push('scripts')
 <script>
+    function validateStudent() {
+        if(is_student){
+            enableSubmitButton();
+            ocultarCamposEstudiante()
+        }
+        else{
+            disableSubmitButton();
+            mostrarCamposNoEstudiante()
+        }
+    }
+    function is_student() {
+        const perfil = $('#perfil option:selected').text()
+        if (perfil == 'Estudiante' || perfil == 'ESTUDIANTE' || perfil == 'estudiante')
+            return true
+        return false
+
+
+
+    }
+
+    function enableSubmitButton() {
+        $('#btnSubmit').prop('disabled', false)
+    }
+
+    function disableSubmitButton() {
+        $('#btnSubmit').prop('disabled', true)
+    }
+
+    function ocultarCamposEstudiante() {
+        const list = ['email', 'id_cead', 'password', 'password2']
+
+        $.each(list, function(k, v) {
+            console.log(v)
+            $('#' + v).attr('disabled', true)
+            $('#' + v).parent().attr('hidden', true)
+
+        })
+
+    }
+
+    function mostrarCamposNoEstudiante() {
+        const list = ['email', 'id_sead', 'password', 'password2']
+
+        $.each(list, function(k, v) {
+            console.log(v)
+            $('#' + v).attr('disabled', false)
+            $('#' + v).parent().attr('hidden', false)
+
+        })
+
+
+    }
+
+    function changePerfil() {
+        if (is_student()) {
+            ocultarCamposEstudiante();
+            enableSubmitButton()
+        } else {
+            mostrarCamposNoEstudiante();
+            disableSubmitButton()
+
+        }
+
+    }
+
     function errors() {
         let pass1 = $('#password').val();
         let pass2 = $('#password2').val();
@@ -251,6 +316,7 @@
 
     }
     $(document).ready(function() {
+        validateStudent()
         $('#btnSubmit').prop('disabled', false)
 
         $('#password').on('blur', function() {
@@ -291,6 +357,9 @@
         $(".js-example-basic-multiple").select2({
             theme: "classic"
 
+        })
+        $('#perfil').on('change', function() {
+            changePerfil();
         })
 
 

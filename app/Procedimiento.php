@@ -8,7 +8,7 @@ class Procedimiento extends Model
 {
     protected $table = 'procedimientos';
     protected $primaryKey = 'id_procedimiento';
-    protected $fillable = ['nombre', 'anotacion', 'estado', 'fecha_inicio', 'id_usuario_responsable', 'id_programa', 'id_plantilla_procedimiento', 'programa', 'tipo', 'url_documento', 'ruta_raiz' ];
+    protected $fillable = ['nombre', 'anotacion', 'estado', 'fecha_inicio', 'id_usuario_responsable', 'id_programa', 'id_plantilla_procedimiento', 'programa', 'tipo', 'id_estudiante' ];
    
 
     public function programa()
@@ -22,6 +22,10 @@ class Procedimiento extends Model
     }
     public function lider(){
         return $this->hasOne('App\User', 'id', 'id_usuario_responsable');
+
+    }
+    public function estudiante(){
+        return $this->hasOne('App\User', 'id', 'id_estudiante');
 
     }
     public function versiones(){

@@ -68,7 +68,7 @@
                                 </div>
 
 
-                                <div class="form-group col-md-6 col-lg-6">
+                                <div class="form-group col-md-12 col-lg-12">
                                     <label for="id_programa">Programa* </label>
                                     <select name="id_programa" required class="form-control" id="id_programa">
 
@@ -76,14 +76,29 @@
 
                                     </select>
                                 </div>
-                                <div class="form-group col-md-6 col-lg-6">
-                                    <label for="url_documento">Ruta de documento general*</label>
-                                    <input value="{{$procedimiento->url_documento}}" required name="url_documento" type="text" class="form-control" id="url_documento" placeholder="Ruta ">
+                                <div class="form-group col-md-6">
+                                    <label for="sel1">Perfil:</label>
+                                    <select disabled id="" data_id_user="{{$procedimiento->estudiante->id}}" onchange="loadUsers(this, event)" class="form-control select_perfil">
+                                        <option disabled selected>Seleccione...</option>
+                                        @forelse($perfiles as $perfil)
+
+                                        <option {{($procedimiento->estudiante->perfil->id_perfil == $perfil->id_perfil)? 'selected': ''}} value="{{$perfil->id_perfil}}">{{$perfil->perfil}}</option>
+                                        @empty
+                                        @endforelse
+
+                                    </select>
                                 </div>
-                                <div class="form-group col-md-6 col-lg-6">
-                                    <label for="ruta_raiz">Ruta de carpeta raíz*</label>
-                                    <input value="{{$procedimiento->ruta_raiz}}" required name="ruta_raiz" type="text" class="form-control" id="ruta_raiz" placeholder="Ruta raiz">
+                                <div class="col-md">
+                                    <div class="form-group">
+                                        <label for="sel1">Estudiante:</label>
+                                        <select style="width: 100%" name ='id_estudiante' class="js-data-example-ajax user form-control">
+
+
+                                        </select>
+                                    </div>
                                 </div>
+
+
                                 <div class="form-group col-md-6 col-lg-6">
                                     <label for="id_programa">Plantilla procedimiento* </label>
                                     <select disabled name="id_plantilla_procedimiento" required class="form-control" id="id_plantilla">
@@ -148,7 +163,7 @@
                                                     <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label for="sel1">Usuario:</label>
-                                                            <select style="width: 150%" class="js-data-example-ajax user form-control">
+                                                            <select  style="width: 150%" class="js-data-example-ajax user form-control">
 
 
                                                             </select>
@@ -325,6 +340,7 @@
 
         let allResponsables = await responsables();
         let dataForm = $('#formProcedimiento').serializeArray();
+        
         var form_data = new FormData($('#formProcedimiento')[0])
         let url = $('#formProcedimiento').attr('action');
 
@@ -345,7 +361,7 @@
                 }
             });
 
-            if(response.status == 202){
+            if (response.status == 202) {
                 window.location.href = response.url;
 
             }
@@ -423,6 +439,7 @@
     }
     $(document).ready(function() {
 
+        $(".js-data-example-ajax").select2();
         $('nav.main-header a.nav-link').click();
         $('#id_escuela').trigger('change');
         change_perfiles()

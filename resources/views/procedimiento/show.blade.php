@@ -16,29 +16,31 @@
 
                         <li><strong>Fecha inicio:</strong> {{$procedimiento->fecha_inicio}}</li>
                         <li><strong>Lider de procedimiento:</strong> {{$procedimiento->lider->primer_nombre}} {{$procedimiento->lider->primer_apellido}} - {{$procedimiento->lider->perfil->perfil}}</li>
+                        <li><strong>Estudiante:</strong> {{($procedimiento->estudiante) ? $procedimiento->estudiante->primer_nombre.' '.$procedimiento->lider->primer_apellido : 'N/A'}} </li>
+                       
                         <li><strong>Escuela:</strong> {{$procedimiento->programa->escuela->escuela}}</li>
 
                         <li><strong>Programa:</strong> {{$procedimiento->programa->programa}}</li>
                         <li><strong>Tipo:</strong> {{$procedimiento->tipo}}</li>
                         <li><strong>Estado:</strong> {{$procedimiento->estado}}</li>
-                        <li><strong>Version Actual:</strong> {{$version}}</li>
+                        <!-- <li><strong>Version Actual:</strong> {{$version}}</li> -->
 
                     </ul>
                 </div>
                 <div class="col-md-6">
                     <h3 class="my-3">Operaciones</h3>
                     <ul>
-                        @if($type == 'url')
+                        <!-- @if($type == 'url')
                         <li><strong>Documento general:</strong> <a target="_blank" href="{{$url_version}}">{{$url_version}}</a> </li>
 
                         @else
                         <li><strong>Documento general:</strong> <a target="_blank" href="{{asset('/public/archivos/versiones/'.$url_version)}}">Ver</a> </li>
 
-                        @endif
-                        <li><strong>Ruta repositorio raíz:</strong> <a target="_blank" href="{{$procedimiento->ruta_raiz}}">{{$procedimiento->ruta_raiz}}</a></li>
+                        @endif -->
+                        <!-- <li><strong>Ruta repositorio raíz:</strong> <a target="_blank" href="{{$procedimiento->ruta_raiz}}">{{$procedimiento->ruta_raiz}}</a></li> -->
                         <li><strong>Ruta pública anexos:</strong> <a target="_blank" href="{{route('procedimientos.anexos_publicos', $procedimiento->id_procedimiento)}}">Listado anexos</a></li>
 
-                        <li><a onclick="modalVersionar(this, event)" href="#">Versionar</a></li>
+                        <!-- <li><a onclick="modalVersionar(this, event)" href="#">Versionar</a></li> -->
                         <li><a onclick="modalAnexos(this, event)" href="#">Anexos</a></li>
 
                         <li><a onclick="modalAnotacion(this, event)" href="#">Anotaciones</a></li>

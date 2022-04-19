@@ -83,16 +83,47 @@
 
                                     </select>
                                 </div>
-                                <div class="form-group col-md-6 col-lg-6">
+                                <!-- <div class="form-group col-md-6 col-lg-6">
                                     <label for="url_documento">Ruta de documento general*</label>
                                     <input required name="url_documento" type="text" class="form-control" id="url_documento" placeholder="Ruta ">
                                 </div>
                                 <div class="form-group col-md-6 col-lg-6">
                                     <label for="ruta_raiz">Ruta de carpeta raíz*</label>
                                     <input required name="ruta_raiz" type="text" class="form-control" id="ruta_raiz" placeholder="Ruta raiz">
-                                </div>
+                                </div> -->
 
                             </div>
+
+                            <div class="row m-2" >
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sel1">Perfil:</label>
+                                        <select onchange="loadUsers(this, event)" class="form-control">
+                                            <option disabled selected>Seleccione...</option>
+                                            @forelse($perfiles as $perfil)
+                                                @if($perfil->perfil == 'ESTUDIANTE' || $perfil->perfil == 'Estudiante' || $perfil->perfil == 'estudiante')
+                                                <option value="{{$perfil->id_perfil}}">{{$perfil->perfil}}</option>
+                                                @endif
+                                            @empty
+                                            @endforelse
+
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sel1">Estudiante: *</label>
+                                        <select style="width: 100%"  name="estudiante" id="estudiante" required class="js-data-example-ajax user form-control">
+
+
+                                        </select>
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+                           
 
                         </form>
                     </div>
@@ -155,7 +186,6 @@
         if (elementos.length) {
             let faltan = false;
             $.each(elementos, function(k, v) {
-                console.log($(v).attr('id'));
                 let users = $(v).find('select.user');
                 if (users.length) {
                     let arrayUsersTr = [];
@@ -283,6 +313,8 @@
 
         $('nav.main-header a.nav-link').click();
         $('#id_escuela').trigger('change');
+        $(".js-data-example-ajax").select2();
+
 
     })
 </script>

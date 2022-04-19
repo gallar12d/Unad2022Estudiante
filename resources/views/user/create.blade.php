@@ -200,7 +200,7 @@
     }
 
     function ocultarCamposEstudiante() {
-        const list = ['email', 'id_cead', 'password', 'password2']
+        const list = [ 'id_cead', 'password', 'password2']
 
         $.each(list, function(k, v) {
             console.log(v)
@@ -212,7 +212,7 @@
     }
 
     function mostrarCamposNoEstudiante() {
-        const list = ['email', 'id_sead', 'password', 'password2']
+        const list = [ 'id_sead', 'password', 'password2']
 
         $.each(list, function(k, v) {
             console.log(v)
