@@ -57,7 +57,7 @@
 
                             <div class="form-group col-md-6 col-lg-6">
                                 <label for="tipo_identificacion">Perfil*</label>
-                                <select name="id_perfil" class="form-control" id="rol">
+                                <select name="id_perfil" class="form-control" id="perfil">
                                     @forelse($perfiles as $perfil)
                                     <option value="{{$perfil->id_perfil}}">{{$perfil->perfil}}</option>
 
@@ -71,7 +71,7 @@
                                 <label for="roles">Roles*</label>
                                 <select required multiple name="roles[]" class="js-example-basic-multiple form-control" id="rol">
                                     @forelse($roles as $rol)
-                                    <option >{{$rol->name}}</option>
+                                    <option>{{$rol->name}}</option>
 
                                     @empty
 
@@ -80,8 +80,8 @@
                                 </select>
                             </div>
                             <div class=" form-group col-md-6 col-lg-6">
-                                        <label for="celular1">Celular 1*</label>
-                                        <input required name="celular1" type="number" class="form-control" id="celular1" placeholder="Celular 1">
+                                <label for="celular1">Celular 1*</label>
+                                <input required name="celular1" type="number" class="form-control" id="celular1" placeholder="Celular 1">
                             </div>
                             <div class="form-group col-md-6 col-lg-6">
                                 <label for="celular2">Celular 2</label>
@@ -181,7 +181,63 @@
 @endsection
 @push('scripts')
 <script>
+    function is_student() {
+        const perfil = $('#perfil option:selected').text()
+        if (perfil == 'Estudiante' || perfil == 'ESTUDIANTE' || perfil == 'estudiante')
+            return true
+        return false
+
+
+
+    }
+
+    function enableSubmitButton() {
+        $('#btnSubmit').prop('disabled', false)
+    }
+
+    function disableSubmitButton() {
+        $('#btnSubmit').prop('disabled', true)
+    }
+
+    function ocultarCamposEstudiante() {
+        const list = ['email', 'id_cead', 'password', 'password2']
+
+        $.each(list, function(k, v) {
+            console.log(v)
+            $('#' + v).attr('disabled', true)
+            $('#' + v).parent().attr('hidden', true)
+
+        })
+
+    }
+
+    function mostrarCamposNoEstudiante() {
+        const list = ['email', 'id_sead', 'password', 'password2']
+
+        $.each(list, function(k, v) {
+            console.log(v)
+            $('#' + v).attr('disabled', false)
+            $('#' + v).parent().attr('hidden', false)
+
+        })
+
+
+    }
+
+    function changePerfil() {
+        if (is_student()) {
+            ocultarCamposEstudiante();
+            enableSubmitButton()
+        } else {
+            mostrarCamposNoEstudiante();
+            disableSubmitButton()
+
+        }
+
+    }
+
     function errors() {
+
         let pass1 = $('#password').val();
         let pass2 = $('#password2').val();
 
@@ -215,6 +271,11 @@
         if (pass1 == pass2 && pass1.length >= 8) {
             pasa = true
         }
+
+        if (is_student())
+            pasa = true
+
+
 
         if (pasa) {
             $('#btnSubmit').prop('disabled', false)
@@ -267,6 +328,10 @@
         $(".js-example-basic-multiple").select2({
             theme: "classic"
 
+        })
+
+        $('#perfil').on('change', function() {
+            changePerfil();
         })
 
 
